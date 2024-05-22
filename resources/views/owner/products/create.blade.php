@@ -13,9 +13,11 @@
                 <form method="post" action="{{ route('owner.products.store')}}">
                     @csrf
                     <div class="-m-2">
+                      
                       <div class="p-2 w-1/2 mx-auto">
                         <div class="relative">
-                          <select name="category">
+                          <label for="category" class="leading-7 text-sm text-gray-600">カテゴリー</label>
+                          <select name="category" id="category" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             @foreach($categories as $category)
                               <optgroup label="{{ $category->name }}">
                                 @foreach($category->secondary as $secondary)
@@ -31,6 +33,13 @@
                       <x-select-image :images="$images" name="image2" />
                       <x-select-image :images="$images" name="image3" />
                       <x-select-image :images="$images" name="image4" />
+                      <x-select-image :images="$images" name="image5" />
+                      <div class="p-2 w-1/2 mx-auto">
+                        <div class="relative flex justify-around">
+                          <div><input type="radio" name="is_selling" value="1" class="mr-2" checked>販売中</div>
+                          <div><input type="radio" name="is_selling" value="0" class="mr-2" >停止中</div>
+                        </div>
+                      </div>
                       <div class="p-2 w-full flex justify-around mt-4">
                         <button type="button" onclick="location.href='{{ route('owner.products.index') }}'" class=" bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
                         <button type="submit" class=" text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">登録する</button>
@@ -42,20 +51,20 @@
       </div>
   </div>
   <script>
-    'use strict'
-    const images = document.querySelectorAll('.image') //全てのimageタグを取得
-    images.forEach(image => { // 1つずつ繰り返す
-      image.addEventListener('click', function(e){ // クリックしたら
-        const imageName = e.target.dataset.id.substr(0, 6) //data-idの6文字
-        const imageId = e.target.dataset.id.replace(imageName + '_', '') // 6文字カット
-        const imageFile = e.target.dataset.file
-        const imagePath = e.target.dataset.path
-        const modal = e.target.dataset.modal
-        // サムネイルと input type=hiddenのvalueに設定
-        document.getElementById(imageName + '_thumbnail').src = imagePath + '/' + imageFile
-        document.getElementById(imageName + '_hidden').value = imageId
-        MicroModal.close(modal); //モーダルを閉じる
-    }, )
-    })
-  </script>
+  'use strict'
+const images = document.querySelectorAll('.image') //全てのimageタグを取得
+images.forEach(image => { // 1つずつ繰り返す
+image.addEventListener('click', function(e){ // クリックしたら
+const imageName = e.target.dataset.id.substr(0, 6) //data-idの6文字
+const imageId = e.target.dataset.id.replace(imageName + '_', '') // 6文字カット
+const imageFile = e.target.dataset.file
+const imagePath = e.target.dataset.path
+const modal = e.target.dataset.modal
+// サムネイルと input type=hiddenのvalueに設定
+document.getElementById(imageName + '_thumbnail').src = imagePath + '/' + imageFile
+document.getElementById(imageName + '_hidden').value = imageId
+MicroModal.close(modal); //モーダルを閉じる
+})
+})
+</script>
 </x-app-layout>
