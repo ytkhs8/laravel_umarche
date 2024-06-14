@@ -8373,6 +8373,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // core version + navigation, pagination modules:
 
+
 // configure Swiper to use modules
 swiper_core__WEBPACK_IMPORTED_MODULE_1__["default"].use([swiper_core__WEBPACK_IMPORTED_MODULE_2__["default"], swiper_core__WEBPACK_IMPORTED_MODULE_3__["default"]]);
 
